@@ -6,7 +6,7 @@
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>About</h2>
-    <p>
-        Put content here.
+    <p style="margin-bottom:0px">
+        Credits: <% Html.RenderPartial("ShowDataUserControl"); %>
     </p>
 </asp:Content>

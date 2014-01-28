@@ -18,6 +18,11 @@ namespace DemoMvcApplication.Controllers
 
         public ActionResult About()
         {
+            // Populate credits
+            ViewData["Coding"] = "Chuck Wilbur";
+            ViewData["Management"] = "John Yetter";
+            ViewData["Testing"] = "Linda Veit";
+
             return View();
         }
     }
