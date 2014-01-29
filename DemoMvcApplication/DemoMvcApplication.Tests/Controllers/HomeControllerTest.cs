@@ -37,6 +37,8 @@ namespace DemoMvcApplication.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
+            ViewDataDictionary viewData = result.ViewData;
+            Assert.AreEqual(3, viewData.Count); // Credits
         }
     }
 }
