@@ -11,7 +11,7 @@ namespace DemoMvcApplication.Controllers
     {
         public ActionResult Index()
         {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
+            ViewData["Message"] = "Welcome to the SNS-built demo application";
 
             return View();
         }
