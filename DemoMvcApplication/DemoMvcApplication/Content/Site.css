@@ -1,6 +1,6 @@
 ﻿body
 {
-    background-color: rgb(81, 143, 71);
+    background-color: #eee;
     font-size: .75em;
     font-family: Verdana, Helvetica, Sans-Serif;
     margin: 0;
@@ -97,7 +97,7 @@ page width. Or, you can specify an exact pixel width. */
     font-weight: bold;
     padding: 5px 0;
     margin: 0;
-    color: #fff;
+    color: rgb(81, 143, 71);
     border: none;
     line-height: 2em;
     font-family: Arial, Helvetica, sans-serif;
@@ -263,24 +263,24 @@ div#title
     display:block;
     text-align:right;
     margin:10px;
-    color:White;
+    color:rgb(81, 143, 71);
 }
 
 #logindisplay a:link
 {
-    color: white;
+    color: rgb(81, 143, 71);
     text-decoration: underline;
 }
 
 #logindisplay a:visited
 {
-    color: white;
+    color: rgb(81, 143, 71);
     text-decoration: underline;
 }
 
 #logindisplay a:hover
 {
-    color: white;
+    color: rgb(81, 143, 71);
     text-decoration: none;
 }
 
