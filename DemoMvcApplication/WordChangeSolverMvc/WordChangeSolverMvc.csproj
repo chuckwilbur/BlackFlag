@@ -6,12 +6,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CDE215E1-62EB-45CE-A2B4-881C1DF01541}</ProjectGuid>
+    <ProjectGuid>{65DC3814-A02A-40F7-ACFC-7E5AC467E503}</ProjectGuid>
     <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DemoMvcApplication</RootNamespace>
-    <AssemblyName>DemoMvcApplication</AssemblyName>
+    <RootNamespace>WordChangeSolverMvc</RootNamespace>
+    <AssemblyName>WordChangeSolverMvc</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
@@ -24,7 +24,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,7 +37,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -70,29 +68,17 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StatePedCycleCrashesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\CrashRepository.cs" />
-    <Compile Include="Models\DemoMvcDataClasses.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DemoMvcDataClasses.dbml</DependentUpon>
-    </Compile>
+    <Compile Include="Models\EnglishDictionary.cs" />
+    <Compile Include="Models\WordNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DemoMvcData.mdf" />
-    <Content Include="App_Data\DemoMvcData_log.ldf">
-      <DependentUpon>DemoMvcData.mdf</DependentUpon>
-    </Content>
+    <Content Include="App_Data\english-words.txt" />
     <Content Include="Global.asax" />
-    <Content Include="Views\Home\ShowDataUserControl.ascx" />
-    <Content Include="Views\StatePedCycleCrashes\Details.aspx" />
-    <Content Include="Views\StatePedCycleCrashes\Index.aspx" />
-    <Content Include="Views\StatePedCycleCrashes\NotFound.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -123,20 +109,6 @@
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
-    <None Include="Models\DemoMvcDataClasses.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DemoMvcDataClasses.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Models\DemoMvcDataClasses.dbml.layout">
-      <DependentUpon>DemoMvcDataClasses.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -154,7 +126,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49397</DevelopmentServerPort>
+          <DevelopmentServerPort>49430</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

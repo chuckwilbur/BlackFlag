@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DemoMvcApplication.WordChangeSolver.Models
+namespace WordChangeSolverMvc.Models
 {
     public class EnglishDictionary
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DemoMvcApplication.WordChangeSolver.Models;
+using WordChangeSolverMvc.Models;
 
-namespace DemoMvcApplication.Tests.WordChangeSolver.Models
+namespace WordChangeSolverMvc.Tests.Models
 {
     [TestClass]
     public class EnglishDictionaryTest
@@ -15,7 +15,7 @@ namespace DemoMvcApplication.Tests.WordChangeSolver.Models
         {
             string test = System.IO.Directory.GetCurrentDirectory();
             EnglishDictionary dict = new EnglishDictionary(
-                @"..\..\..\DemoMvcApplication\App_Data\english-words.txt");
+                @"..\..\..\WordChangeSolverMvc\App_Data\english-words.txt");
 
             WordNode testHead;
             Assert.IsTrue(dict.TryGetValue("head", out testHead));
