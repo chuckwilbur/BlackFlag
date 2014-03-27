@@ -82,12 +82,15 @@
       <DependentUpon>DemoMvcDataClasses.dbml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WordChangeSolver\Models\EnglishDictionary.cs" />
+    <Compile Include="WordChangeSolver\Models\WordNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DemoMvcData.mdf" />
     <Content Include="App_Data\DemoMvcData_log.ldf">
       <DependentUpon>DemoMvcData.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\english-words.txt" />
     <Content Include="Global.asax" />
     <Content Include="Views\Home\ShowDataUserControl.ascx" />
     <Content Include="Views\StatePedCycleCrashes\Details.aspx" />
