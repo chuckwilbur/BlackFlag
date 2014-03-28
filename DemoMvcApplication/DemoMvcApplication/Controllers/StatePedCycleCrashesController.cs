@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DemoMvcApplication.Models;
+using DemoMvcApplication.Helpers;
 
 namespace DemoMvcApplication.Controllers
 {
@@ -14,10 +15,14 @@ namespace DemoMvcApplication.Controllers
         //
         // GET: /StatePedCycleCrashes/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var crashes = _crashRepository.FindOrderedCrashes().ToList();
-            return View(crashes);
+            const int pageSize = 50;
+            IQueryable<StatePedCycleCrash> crashes =
+                _crashRepository.FindOrderedCrashes();
+            var paginatedCrashes =
+                new PaginatedList<StatePedCycleCrash>(crashes, page ?? 0, pageSize);
+            return View(paginatedCrashes);
         }
 
         //

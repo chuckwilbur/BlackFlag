@@ -17,6 +17,12 @@ namespace DemoMvcApplication
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "StatePedCycleCrashesList", // Route name
+                "StatePedCycleCrashes/Page/{page}", // URL with parameters
+                new { controller = "StatePedCycleCrashes", action = "Index" } // Parameter defaults
+            );
+
+            routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults

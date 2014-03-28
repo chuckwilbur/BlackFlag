@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<DemoMvcApplication.Models.StatePedCycleCrash>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<DemoMvcApplication.Helpers.PaginatedList<DemoMvcApplication.Models.StatePedCycleCrash>>" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+<asp:Content ID="Title" ContentPlaceHolderID="TitleContent" runat="server">
 	Index
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Main" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Index</h2>
 
@@ -145,9 +145,17 @@
 
     </table>
 
-    <p>
-        <%: Html.ActionLink("Create New", "Create") %>
-    </p>
+    <% if (Model.HasPreviousPage) { %>
+ 
+        <%= Html.RouteLink("<<<", "StatePedCycleCrashesList", new { page = (Model.PageIndex - 1) })%>
+ 
+    <% } %>
+ 
+    <% if (Model.HasNextPage) {  %>
+ 
+        <%= Html.RouteLink(">>>", "StatePedCycleCrashesList", new { page = (Model.PageIndex + 1) })%>
+ 
+    <% } %>  
 
 </asp:Content>
 
