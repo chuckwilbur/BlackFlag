@@ -12,7 +12,13 @@ namespace WordChangeSolverMvc.Models
 
         public WordNode(string word) { _word = word; }
         internal void AddNeighbor(WordNode neighbor) { _neighborWords.Add(neighbor); }
-        public IEnumerable<WordNode> NeighborWords { get { return _neighborWords; } }
+        public IEnumerable<WordNode> NeighborWords
+        {
+            get
+            {
+                return _neighborWords.OrderBy<WordNode, string>(p => p.ToString());
+            }
+        }
 
         public override string ToString() { return _word; }
     }
