@@ -7,7 +7,7 @@ namespace WordChangeSolverMvc.Models
 {
     public class EnglishDictionary
     {
-        Dictionary<string, WordNode> _dictionary;
+        Dictionary<string, WordNode> _dictionary = null;
 
         public EnglishDictionary(string wordFile)
         {
