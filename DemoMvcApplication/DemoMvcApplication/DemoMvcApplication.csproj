@@ -82,6 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DemoMvcDataClasses.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ICrashRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

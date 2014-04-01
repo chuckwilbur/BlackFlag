@@ -10,7 +10,16 @@ namespace DemoMvcApplication.Controllers
 {
     public class StatePedCycleCrashesController : Controller
     {
-        CrashRepository _crashRepository = new CrashRepository();
+        ICrashRepository _crashRepository;
+        public StatePedCycleCrashesController()
+            : this(new CrashRepository())
+        {
+        }
+
+        public StatePedCycleCrashesController(ICrashRepository repository)
+        {
+            _crashRepository = repository;
+        }
 
         //
         // GET: /StatePedCycleCrashes/
