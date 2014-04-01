@@ -9,18 +9,18 @@ namespace WordChangeSolverMvc.Controllers
 {
     public class WordChangeController : Controller
     {
-        EnglishDictionary _dictionary = null;
+        string[] _words;
 
         public WordChangeController()
         {
             string appBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            string[] lines = System.IO.File.ReadAllLines(System.IO.Path.Combine(
+            _words = System.IO.File.ReadAllLines(System.IO.Path.Combine(
                     appBase, @"App_Data\english-words.txt"));
         }
 
         public WordChangeController(string[] words)
         {
-            _dictionary = new EnglishDictionary(words);
+            _words=words;
         }
 
         //
@@ -28,15 +28,23 @@ namespace WordChangeSolverMvc.Controllers
 
         public ActionResult Index()
         {
-            return Solve("head");
+            return View();
         }
 
-        public ViewResult Solve(string testInput)
+        //
+        // AJAX: /WordChange/Solve
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Solve(string startWord, string endWord, int depth)
         {
-            WordNode word;
-            _dictionary.TryGetValue(testInput, out word);
-            ViewData[word.ToString()] = word;
-            return View(word);
+            EnglishDictionary dictionary = new EnglishDictionary(_words);
+            Puzzle puzzle = new Puzzle(dictionary);
+            puzzle.StartWord = startWord;
+            puzzle.EndWord = endWord;
+
+            IEnumerable<string> jsonWords = puzzle.Solve(depth);
+
+            return Json(jsonWords.ToList());
         }
     }
 }

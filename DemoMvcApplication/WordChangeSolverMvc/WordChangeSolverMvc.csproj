@@ -74,12 +74,14 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\EnglishDictionary.cs" />
+    <Compile Include="Models\Puzzle.cs" />
     <Compile Include="Models\WordNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\english-words.txt" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\WordChange.js" />
     <Content Include="Views\WordChange\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
