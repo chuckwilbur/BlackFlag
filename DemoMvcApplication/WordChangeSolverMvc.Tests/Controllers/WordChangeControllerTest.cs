@@ -6,37 +6,45 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WordChangeSolverMvc.Controllers;
 using WordChangeSolverMvc.Models;
+using WordChangeSolverMvc.Tests.Models;
 
 namespace WordChangeSolverMvc.Tests.Controllers
 {
     [TestClass]
     public class WordChangeControllerTest
     {
-        const string testInput = "head";
-        string[] words = {
-                             "head",
-                             "bead",
-                             "dead",
-                             "heal",
-                             "teal",
-                             "tear",
-                             "tell",
-                             "tall",
-                             "tail",
-                             "herd",
-                             "lead",
-                             "mead",
-                             "read"
-                         };
-
         [TestMethod]
-        public void Index()
+        public void Index_With_No_Parameters_Returns_Plain_View()
         {
-            var controller = new WordChangeController(words);
+            // Arrange
+            var controller = new WordChangeController(PuzzleTest.Words);
 
             // Act
+            ViewResult result = controller.Index() as ViewResult;
 
             // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void Solve_With_Head_Tail_Returns_JSON_List()
+        {
+            // Arrange
+            var controller = new WordChangeController(PuzzleTest.Words);
+
+            // Act
+            JsonResult result = controller.Solve("head", "tail", 6) as JsonResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            var resultList = result.Data as List<string>;
+            Assert.IsNotNull(resultList);
+            Assert.AreEqual(PuzzleTest.ExpectedResultHeadToTail.Length, resultList.Count);
+
+            for (int i = 0; i < PuzzleTest.ExpectedResultHeadToTail.Length; ++i)
+            {
+                Assert.AreEqual(PuzzleTest.ExpectedResultHeadToTail[i], resultList[i]);
+            }
         }
     }
 }
