@@ -9,25 +9,18 @@ namespace WordChangeSolverMvc.Controllers
 {
     public class WordChangeController : Controller
     {
-        static EnglishDictionary _dictionary = null;
-        public static EnglishDictionary Dictionary
+        EnglishDictionary _dictionary = null;
+
+        public WordChangeController()
         {
-            get
-            {
-                System.Diagnostics.Debug.Assert(_dictionary != null);
-                return _dictionary;
-            }
+            string appBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            string[] lines = System.IO.File.ReadAllLines(System.IO.Path.Combine(
+                    appBase, @"App_Data\english-words.txt"));
         }
 
-        public WordChangeController() : this(AppDomain.CurrentDomain.SetupInformation.ApplicationBase) { }
-
-        public WordChangeController(string appBase)
+        public WordChangeController(string[] words)
         {
-            if (_dictionary == null)
-            {
-                _dictionary = new EnglishDictionary(System.IO.Path.Combine(
-                    appBase, @"App_Data\english-words.txt"));
-            }
+            _dictionary = new EnglishDictionary(words);
         }
 
         //

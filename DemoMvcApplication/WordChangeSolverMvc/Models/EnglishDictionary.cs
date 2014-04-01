@@ -9,12 +9,11 @@ namespace WordChangeSolverMvc.Models
     {
         Dictionary<string, WordNode> _dictionary = null;
 
-        public EnglishDictionary(string wordFile)
+        public EnglishDictionary(string[] words)
         {
-            string[] lines = System.IO.File.ReadAllLines(wordFile);
-            _dictionary = new Dictionary<string, WordNode>(lines.Length);
+            _dictionary = new Dictionary<string, WordNode>(words.Length);
 
-            foreach (string line in lines.Select<string, string>(p => p.ToLower()))
+            foreach (string line in words.Select<string, string>(p => p.ToLower()))
             {
                 if (line.Contains('\'')) continue;
                 if (_dictionary.ContainsKey(line)) continue;
