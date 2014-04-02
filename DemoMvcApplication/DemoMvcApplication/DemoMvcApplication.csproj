@@ -76,6 +76,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PaginatedList.cs" />
+    <Compile Include="Helpers\StaticCache.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CrashRepository.cs" />
     <Compile Include="Models\DemoMvcDataClasses.designer.cs">

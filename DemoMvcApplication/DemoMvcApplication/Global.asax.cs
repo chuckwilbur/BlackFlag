@@ -32,6 +32,8 @@ namespace DemoMvcApplication
 
         protected void Application_Start()
         {
+            DemoMvcApplication.Helpers.StaticCache.LoadStaticCache();
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);

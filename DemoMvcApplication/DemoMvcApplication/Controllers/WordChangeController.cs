@@ -9,18 +9,11 @@ namespace WordChangeSolverMvc.Controllers
 {
     public class WordChangeController : Controller
     {
-        static EnglishDictionary _dictionary = null;
+        EnglishDictionary _dictionary = null;
 
         public WordChangeController()
         {
-            // Hold neighbor-linked dictionary in memory once loaded
-            if (_dictionary == null)
-            {
-                string appBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-                string[] words = System.IO.File.ReadAllLines(System.IO.Path.Combine(
-                        appBase, @"App_Data\english-words.txt"));
-                _dictionary = new EnglishDictionary(words);
-            }
+            _dictionary = DemoMvcApplication.Helpers.StaticCache.GetEnglishDictionary();
         }
 
         public WordChangeController(string[] words)
