@@ -43,6 +43,8 @@ namespace WordChangeSolverMvc.Models
 
         public bool ContainsKey(string key) { return _dictionary.ContainsKey(key); }
 
+        public WordNode this[string key] { get { return _dictionary[key]; } }
+
         public bool TryGetValue(string key, out WordNode value)
         {
             return _dictionary.TryGetValue(key, out value);

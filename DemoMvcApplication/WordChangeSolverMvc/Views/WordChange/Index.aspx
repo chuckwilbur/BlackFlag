@@ -21,7 +21,6 @@
         <div id="solveResult"></div>
         <%= Html.TextBox("EndWord") %>
         <p />
-        <%= Html.TextBox("Depth", 20, new { @style="width:50px" })%>
         <input id="solve" type="submit" value="Solve" onclick="Solve()"/>
     </div>
 </asp:Content>

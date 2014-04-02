@@ -8,9 +8,6 @@ namespace WordChangeSolverMvc.Models
     public class Puzzle
     {
         EnglishDictionary _dict;
-        // Initial array size sets the maximum number
-        // of steps that will be tried
-        string[] _bestResult;
 
         public Puzzle(EnglishDictionary dict)
         {
@@ -20,47 +17,43 @@ namespace WordChangeSolverMvc.Models
         public string StartWord { get; set; }
         public string EndWord { get; set; }
 
-        public IEnumerable<string> Solve(int depth)
+        public IEnumerable<string> Solve()
         {
-            // array size is depth +1 for the start word
-            // +1 to make this one larger than we want
-            // the final result to be at most
-            _bestResult = new string[depth + 2];
+            var foundWordToPredecessor = new Dictionary<string, string>();
 
-            var result = new Stack<string>();
             if (!string.IsNullOrEmpty(StartWord) &&
-                _dict.ContainsKey(StartWord))
+                _dict.ContainsKey(StartWord) &&
+                !string.IsNullOrEmpty(EndWord) &&
+                _dict.ContainsKey(EndWord))
             {
-                result.Push(StartWord);
+                foundWordToPredecessor.Add(StartWord, null);
+                var nodesToTest = new Queue<WordNode>();
+                nodesToTest.Enqueue(_dict[StartWord]);
 
-                if (!string.IsNullOrEmpty(EndWord) &&
-                    _dict.ContainsKey(EndWord))
+                while (nodesToTest.Count > 0)
                 {
-                    Solve(result);
+                    WordNode nextWord = nodesToTest.Dequeue();
+                    if (nextWord.ToString() == EndWord) break;
+
+                    foreach (WordNode neighborWord in nextWord.NeighborWords)
+                    {
+                        if (foundWordToPredecessor.ContainsKey(neighborWord.ToString())) continue;
+                        foundWordToPredecessor.Add(neighborWord.ToString(), nextWord.ToString());
+                        nodesToTest.Enqueue(neighborWord);
+                    }
                 }
             }
-            return _bestResult[0] == StartWord ? _bestResult : new string[0];
-        }
-
-        private void Solve(Stack<string> result)
-        {
-            if (_bestResult.Length > 0 && result.Count >= _bestResult.Length - 1) return;
-            WordNode startWord;
-            if (!_dict.TryGetValue(result.Peek(), out startWord)) return;
-
-            foreach (WordNode nextWord in startWord.NeighborWords)
+            var result = new Stack<string>(foundWordToPredecessor.Count);
+            if (foundWordToPredecessor.ContainsKey(EndWord))
             {
-                if (result.Contains(nextWord.ToString())) continue;
-                result.Push(nextWord.ToString());
-
-                if (nextWord.ToString() == EndWord)
+                string predecessorWord = EndWord;
+                while (predecessorWord != null)
                 {
-                    _bestResult = result.Reverse<string>().ToArray();
-                }
-                else Solve(result);
-
-                result.Pop();
+                    result.Push(predecessorWord);
+                    predecessorWord = foundWordToPredecessor[predecessorWord];
+                } 
             }
+            return result;
         }
     }
 }

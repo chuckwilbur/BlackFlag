@@ -10,9 +10,11 @@ namespace WordChangeSolverMvc.Controllers
     public class WordChangeController : Controller
     {
         string[] _words;
+        System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
 
         public WordChangeController()
         {
+            _stopwatch.Start();
             string appBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
             _words = System.IO.File.ReadAllLines(System.IO.Path.Combine(
                     appBase, @"App_Data\english-words.txt"));
@@ -35,14 +37,22 @@ namespace WordChangeSolverMvc.Controllers
         // AJAX: /WordChange/Solve
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Solve(string startWord, string endWord, int depth)
+        public ActionResult Solve(string startWord, string endWord)
         {
             EnglishDictionary dictionary = new EnglishDictionary(_words);
+            _stopwatch.Stop();
+            var dictLoadTime = _stopwatch.Elapsed;
+            _stopwatch.Reset();
+
             Puzzle puzzle = new Puzzle(dictionary);
             puzzle.StartWord = startWord;
             puzzle.EndWord = endWord;
 
-            IEnumerable<string> jsonWords = puzzle.Solve(depth);
+            _stopwatch.Start();
+            IEnumerable<string> jsonWords = puzzle.Solve();
+            _stopwatch.Stop();
+            var solveTime = _stopwatch.Elapsed;
+            _stopwatch.Reset();
 
             return Json(jsonWords.ToList());
         }

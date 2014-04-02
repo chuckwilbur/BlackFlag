@@ -33,7 +33,7 @@ namespace WordChangeSolverMvc.Tests.Controllers
             var controller = new WordChangeController(PuzzleTest.Words);
 
             // Act
-            JsonResult result = controller.Solve("head", "tail", 6) as JsonResult;
+            JsonResult result = controller.Solve("head", "tail") as JsonResult;
 
             // Assert
             Assert.IsNotNull(result);
