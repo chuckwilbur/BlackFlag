@@ -71,6 +71,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StatePedCycleCrashesController.cs" />
+    <Compile Include="Controllers\WordChangeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -82,7 +83,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DemoMvcDataClasses.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\EnglishDictionary.cs" />
     <Compile Include="Models\ICrashRepository.cs" />
+    <Compile Include="Models\Puzzle.cs" />
+    <Compile Include="Models\WordNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,11 +94,14 @@
     <Content Include="App_Data\DemoMvcData_log.ldf">
       <DependentUpon>DemoMvcData.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\english-words.txt" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\WordChange.js" />
     <Content Include="Views\Home\ShowDataUserControl.ascx" />
     <Content Include="Views\StatePedCycleCrashes\Details.aspx" />
     <Content Include="Views\StatePedCycleCrashes\Index.aspx" />
     <Content Include="Views\StatePedCycleCrashes\NotFound.aspx" />
+    <Content Include="Views\WordChange\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
