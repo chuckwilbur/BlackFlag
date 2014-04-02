@@ -1,5 +1,4 @@
 ﻿function Solve() {
-    $("#solve").hide('normal');
     $('#solveResult').empty();
     $('#solveResult').append($('<li/>').append("Thinking..."));
 
@@ -20,7 +19,6 @@
                 //Add a word to the <ul> solveResult on the right
                 $('#solveResult').append($('<li/>').append(word));
             });
-            $('#solve').show('normal');
         },
         "json");
 }
