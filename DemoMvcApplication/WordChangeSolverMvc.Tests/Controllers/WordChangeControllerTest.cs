@@ -27,7 +27,7 @@ namespace WordChangeSolverMvc.Tests.Controllers
         }
 
         [TestMethod]
-        public void Solve_With_Head_Tail_Returns_JSON_List()
+        public void Solve_With_Head_Tail_Returns_Correct_JSON_List()
         {
             // Arrange
             var controller = new WordChangeController(PuzzleTest.Words);
