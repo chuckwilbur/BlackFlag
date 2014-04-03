@@ -1,4 +1,4 @@
-﻿function Solve() {
+﻿function Solve(solveAddress) {
     $('#solveResult').empty();
     $('#solveResult').append($('<li/>').append("Thinking..."));
 
@@ -7,7 +7,7 @@
     var endWord = jQuery.trim($("#EndWord").val());
     if (endWord.length < 1) return;
 
-    $.post("/WordChange/Solve",
+    $.post(solveAddress,
         { startWord: startWord, endWord: endWord },
         function (solution) {
             $('#solveResult').empty();

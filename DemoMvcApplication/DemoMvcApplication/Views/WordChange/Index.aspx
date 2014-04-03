@@ -6,10 +6,10 @@
 
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
 
-<script src="/Scripts/MicrosoftAjax.js" type="text/javascript"></script>
-<script src="/Scripts/MicrosoftMvcAjax.js" type="text/javascript"></script> 
-<script src="/Scripts/jQuery-1.4.1.js" type="text/javascript"></script>
-<script src="/Scripts/WordChange.js" type="text/javascript"></script>
+<script src="<%= Url.Content ("~/Scripts/MicrosoftAjax.js") %>" type="text/javascript"></script>
+<script src="<%= Url.Content ("~/Scripts/MicrosoftMvcAjax.js") %>" type="text/javascript"></script> 
+<script src="<%= Url.Content ("~/Scripts/jQuery-1.4.1.js") %>" type="text/javascript"></script>
+<script src="<%= Url.Content ("~/Scripts/WordChange.js") %>" type="text/javascript"></script>
 
 <script type="text/javascript">
 
@@ -34,6 +34,6 @@
             </tr>
         </table>
         <p />
-        <input id="solve" type="submit" value="Solve" onclick="Solve()"/>
+        <input id="solve" type="submit" value="Solve" onclick="Solve('<%= Url.Content ("~/WordChange/Solve") %>')"/>
     </div>
 </asp:Content>
