@@ -44,5 +44,35 @@ namespace DemoMvcApplication.Controllers
             if (crash == null) return View("NotFound");
             else return View(crash);
         }
+
+        public ActionResult Stats()
+        {
+            return View(_crashRepository.GetAllStats());
+        }
+
+        public ViewResult StatsByCounty(string county)
+        {
+            return View(_crashRepository.GetStatsByCounty(county));
+        }
+
+        public ViewResult StatsByCity(string city)
+        {
+            return View(_crashRepository.GetStatsByCounty(city));
+        }
+
+        public ActionResult CountyList()
+        {
+            return Json(_crashRepository.GetCountyList());
+        }
+
+        public ActionResult CityList()
+        {
+            return Json(_crashRepository.GetCityList());
+        }
+
+        public ActionResult CityList(string county)
+        {
+            return Json(_crashRepository.GetCityList(county));
+        }
     }
 }

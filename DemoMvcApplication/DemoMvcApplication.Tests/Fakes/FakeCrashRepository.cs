@@ -6,7 +6,7 @@ using DemoMvcApplication.Models;
 
 namespace DemoMvcApplication.Tests.Fakes
 {
-    class FakeCrashRepository : ICrashRepository
+    class FakeCrashRepository : BaseCrashRepository
     {
         private List<StatePedCycleCrash> _crashList;
 
@@ -15,21 +15,9 @@ namespace DemoMvcApplication.Tests.Fakes
             _crashList = crashes;
         }
 
-        public IQueryable<StatePedCycleCrash> FindAllCrashes()
+        protected override IEnumerable<StatePedCycleCrash> CrashList
         {
-            return _crashList.AsQueryable();
-        }
-
-        public IQueryable<StatePedCycleCrash> FindOrderedCrashes()
-        {
-            return (from crash in _crashList
-                    orderby crash.DATE
-                    select crash).AsQueryable();
-        }
-
-        public StatePedCycleCrash GetCrash(string id)
-        {
-            return _crashList.SingleOrDefault(d => d.IMAGE_NO == id);
+            get { return _crashList; }
         }
     }
 }
