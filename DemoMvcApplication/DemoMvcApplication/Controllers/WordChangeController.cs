@@ -36,8 +36,8 @@ namespace WordChangeSolverMvc.Controllers
         public ActionResult Solve(string startWord, string endWord)
         {
             Puzzle puzzle = new Puzzle(_dictionary);
-            puzzle.StartWord = startWord;
-            puzzle.EndWord = endWord;
+            puzzle.StartWord = startWord.ToLower();
+            puzzle.EndWord = endWord.ToLower();
 
             IEnumerable<string> jsonWords = puzzle.Solve();
             return Json(jsonWords.ToList());
