@@ -11,6 +11,9 @@
         { startWord: startWord, endWord: endWord },
         function (solution) {
             $('#solveResult').empty();
+            if (solution.length == 0) {
+                $('#solveResult').append($('<li/>').append("No solution found."));
+            }
             $.each(solution, function (i, word) {
                 // Skip start and end words (already shown in textboxes)
                 if (i == 0) return;
