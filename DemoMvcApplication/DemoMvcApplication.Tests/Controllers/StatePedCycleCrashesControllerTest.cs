@@ -243,8 +243,6 @@ namespace DemoMvcApplication.Tests.Controllers
             }
         }
 
-        // TODO: Get crash counts by county
-        // TODO: Get crash counts by city
         // TODO: Get crashes at street
     }
 }
