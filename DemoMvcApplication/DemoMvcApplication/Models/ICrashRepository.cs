@@ -12,12 +12,12 @@ namespace DemoMvcApplication.Models
 
         IQueryable<KeyValuePair<int, int>> GetAllStats();
         IQueryable<KeyValuePair<int, int>> GetStatsByCounty(string county);
-        IQueryable<KeyValuePair<int, int>> GetStatsByCity(string city);
+        IQueryable<KeyValuePair<int, int>> GetStatsByCity(string county, string city);
 
-        IQueryable<string> GetCountyList();
+        IList<string> GetCountyList();
+        IList<string> GetCityList(string county);
 
-        IQueryable<string> GetCityList();
-        IQueryable<string> GetCityList(string county);
+        IList<int> GetFullYearList();
     }
 
     public abstract class BaseCrashRepository : ICrashRepository
@@ -56,34 +56,37 @@ namespace DemoMvcApplication.Models
                     select new KeyValuePair<int, int>(crashGroup.Key, crashGroup.Count())).AsQueryable();
         }
 
-        public IQueryable<KeyValuePair<int, int>> GetStatsByCity(string city)
+        public IQueryable<KeyValuePair<int, int>> GetStatsByCity(string county, string city)
         {
             return (from crash in CrashList
-                    where crash.CITY == city
+                    where crash.COUNTY == county && crash.CITY == city
                     group crash by crash.DATE.Value.Year into crashGroup
                     select new KeyValuePair<int, int>(crashGroup.Key, crashGroup.Count())).AsQueryable();
         }
 
-        public IQueryable<string> GetCountyList()
+        public IList<string> GetCountyList()
         {
             return (from county in CrashList
                     group county by county.COUNTY into countyGroup
-                    select countyGroup.Key).AsQueryable();
+                    orderby countyGroup.Key
+                    select countyGroup.Key).ToList();
         }
 
-        public IQueryable<string> GetCityList()
-        {
-            return (from city in CrashList
-                    group city by city.CITY into cityGroup
-                    select cityGroup.Key).AsQueryable();
-        }
-
-        public IQueryable<string> GetCityList(string county)
+        public IList<string> GetCityList(string county)
         {
             return (from city in CrashList
                     where city.COUNTY == county
                     group city by city.CITY into cityGroup
-                    select cityGroup.Key).AsQueryable();
+                    orderby cityGroup.Key
+                    select cityGroup.Key).ToList();
+        }
+
+        public IList<int> GetFullYearList()
+        {
+            return (from year in CrashList
+                    group year by year.DATE.Value.Year into yearGroup
+                    orderby yearGroup.Key
+                    select yearGroup.Key).ToList();
         }
     }
 }

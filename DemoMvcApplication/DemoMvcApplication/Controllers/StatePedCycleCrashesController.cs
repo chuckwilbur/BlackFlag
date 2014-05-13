@@ -35,7 +35,7 @@ namespace DemoMvcApplication.Controllers
         }
 
         //
-        // GET: /Dinners/Details/2
+        // GET: /StatePedCycleCrashes/Details/<id>
 
         public ActionResult Details(string id)
         {
@@ -45,9 +45,12 @@ namespace DemoMvcApplication.Controllers
             else return View(crash);
         }
 
+        //
+        // GET: /StatePedCycleCrashes/Stats/
+
         public ActionResult Stats()
         {
-            return View(_crashRepository.GetAllStats());
+            return View(_crashRepository);
         }
 
         public ViewResult StatsByCounty(string county)
@@ -55,24 +58,37 @@ namespace DemoMvcApplication.Controllers
             return View(_crashRepository.GetStatsByCounty(county));
         }
 
-        public ViewResult StatsByCity(string city)
+        //
+        // AJAX: /StatePedCycleCrashes/StatsByCity/<city>
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult StatsByCity(string county, string city)
         {
-            return View(_crashRepository.GetStatsByCounty(city));
+            return Json(_crashRepository.GetStatsByCity(county, city));
         }
 
+        //
+        // AJAX: /StatePedCycleCrashes/CountyList
+
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CountyList()
         {
             return Json(_crashRepository.GetCountyList());
         }
 
-        public ActionResult CityList()
-        {
-            return Json(_crashRepository.GetCityList());
-        }
+        //
+        // AJAX: /StatePedCycleCrashes/CityList/<county>
 
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CityList(string county)
         {
             return Json(_crashRepository.GetCityList(county));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult FullYearList()
+        {
+            return Json(_crashRepository.GetFullYearList());
         }
     }
 }

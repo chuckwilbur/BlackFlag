@@ -102,11 +102,13 @@
     </Content>
     <Content Include="App_Data\english-words.txt" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Stats.js" />
     <Content Include="Scripts\WordChange.js" />
     <Content Include="Views\Home\ShowDataUserControl.ascx" />
     <Content Include="Views\StatePedCycleCrashes\Details.aspx" />
     <Content Include="Views\StatePedCycleCrashes\Index.aspx" />
     <Content Include="Views\StatePedCycleCrashes\NotFound.aspx" />
+    <Content Include="Views\StatePedCycleCrashes\Stats.aspx" />
     <Content Include="Views\WordChange\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -153,7 +155,10 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Shared\DisplayTemplates\" />
+    <Folder Include="Views\StatePedCycleCrashes\DisplayTemplates\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

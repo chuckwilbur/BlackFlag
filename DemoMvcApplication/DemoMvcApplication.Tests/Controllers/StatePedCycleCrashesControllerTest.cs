@@ -18,6 +18,7 @@ namespace DemoMvcApplication.Tests.Controllers
         string[] countyList = new string[] { "ST. LOUIS CITY", "ST. LOUIS", "ST. CHARLES", "ST. LOUIS" };
         string[] cityList = new string[] { "ST. LOUIS", "MAPLEWOOD", "NON-CITY OR UNINCORPORATED", "CLAYTON" };
         string[] stlCountyCityList = new string[] { "MAPLEWOOD", "CLAYTON" };
+        int[] yearList = new int[] { 2002, 2003 };
 
         List<StatePedCycleCrash> CreateTestCrashes()
         {
@@ -125,9 +126,9 @@ namespace DemoMvcApplication.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.ViewData.Model, typeof(IQueryable<KeyValuePair<int, int>>));
-            var list = result.ViewData.Model as IQueryable<KeyValuePair<int, int>>;
-            foreach (KeyValuePair<int, int> pair in list)
+            Assert.IsInstanceOfType(result.ViewData.Model, typeof(ICrashRepository));
+            var list = result.ViewData.Model as ICrashRepository;
+            foreach (KeyValuePair<int, int> pair in list.GetAllStats())
             {
                 switch (pair.Key)
                 {
@@ -156,6 +157,7 @@ namespace DemoMvcApplication.Tests.Controllers
                 {
                     case 2002: Assert.AreEqual(14, pair.Value); break;
                     case 2003: Assert.AreEqual(12, pair.Value); break;
+                    default: Assert.Fail("Out of bounds year found"); break;
                 }
             }
         }
@@ -167,18 +169,19 @@ namespace DemoMvcApplication.Tests.Controllers
             var controller = CreateCrashesController();
 
             // Act
-            var result = controller.StatsByCity("MAPLEWOOD") as ViewResult;
+            var result = controller.StatsByCity("ST. LOUIS", "MAPLEWOOD") as JsonResult;
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.ViewData.Model, typeof(IQueryable<KeyValuePair<int, int>>));
-            var list = result.ViewData.Model as IQueryable<KeyValuePair<int, int>>;
+            Assert.IsInstanceOfType(result.Data, typeof(IQueryable<KeyValuePair<int, int>>));
+            var list = result.Data as IQueryable<KeyValuePair<int, int>>;
             foreach (KeyValuePair<int, int> pair in list)
             {
                 switch (pair.Key)
                 {
-                    case 2002: Assert.AreEqual(7, pair.Value); break;
-                    case 2003: Assert.AreEqual(6, pair.Value); break;
+                    case 2002: Assert.AreEqual(13, pair.Value); break;
+                    case 2003: Assert.AreEqual(12, pair.Value); break;
+                    default: Assert.Fail("Out of bounds year found"); break;
                 }
             }
         }
@@ -194,32 +197,12 @@ namespace DemoMvcApplication.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Data, typeof(IQueryable<string>));
-            var list = result.Data as IQueryable<string>;
-            Assert.AreEqual(countyList.Length - 1, list.Count<string>());
+            Assert.IsInstanceOfType(result.Data, typeof(IList<string>));
+            var list = result.Data as IList<string>;
+            Assert.AreEqual(countyList.Length - 1, list.Count());
             foreach (string county in countyList)
             {
-                Assert.IsTrue(list.Contains<string>(county));
-            }
-        }
-
-        [TestMethod]
-        public void CityListAction_Should_Return_Correct_List()
-        {
-            // Arrange
-            var controller = CreateCrashesController();
-
-            // Act
-            var result = controller.CityList() as JsonResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Data, typeof(IQueryable<string>));
-            var list = result.Data as IQueryable<string>;
-            Assert.AreEqual(cityList.Length, list.Count<string>());
-            foreach (string city in cityList)
-            {
-                Assert.IsTrue(list.Contains<string>(city));
+                Assert.IsTrue(list.Contains(county));
             }
         }
 
@@ -234,15 +217,35 @@ namespace DemoMvcApplication.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result.Data, typeof(IQueryable<string>));
-            var list = result.Data as IQueryable<string>;
-            Assert.AreEqual(stlCountyCityList.Length, list.Count<string>());
+            Assert.IsInstanceOfType(result.Data, typeof(IList<string>));
+            var list = result.Data as IList<string>;
+            Assert.AreEqual(stlCountyCityList.Length, list.Count());
             foreach (string city in stlCountyCityList)
             {
-                Assert.IsTrue(list.Contains<string>(city));
+                Assert.IsTrue(list.Contains(city));
             }
         }
 
         // TODO: Get crashes at street
+
+        [TestMethod]
+        public void FullYearListAction_Should_Return_Correct_List()
+        {
+            // Arrange
+            var controller = CreateCrashesController();
+
+            // Act
+            var result = controller.FullYearList() as JsonResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result.Data, typeof(IList<int>));
+            var list = result.Data as IList<int>;
+            Assert.AreEqual(yearList.Count(), list.Count());
+            foreach (int year in yearList)
+            {
+                Assert.IsTrue(list.Contains(year));
+            }
+        }
     }
 }

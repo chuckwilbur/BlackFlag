@@ -8,6 +8,8 @@
 
     <h2>Index</h2>
 
+    <%: Html.ActionLink("Statistics", "Stats")%>
+
     <table>
         <tr>
             <th></th>
