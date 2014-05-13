@@ -10,6 +10,11 @@
 <script src="<%= Url.Content ("~/Scripts/MicrosoftAjax.js") %>" type="text/javascript"></script>
 <script src="<%= Url.Content ("~/Scripts/MicrosoftMvcAjax.js") %>" type="text/javascript"></script> 
 <script src="<%= Url.Content ("~/Scripts/jQuery-1.4.1.js") %>" type="text/javascript"></script>
+
+<script src="<%= Url.Content ("~/Scripts/Graphics/lodash.js") %>" type="text/javascript"></script>
+<script src="<%= Url.Content ("~/Scripts/Graphics/d3/d3.js") %>" type="text/javascript"></script>
+<script src="<%= Url.Content ("~/Scripts/Graphics/contour/contour.js") %>" type="text/javascript"></script>
+
 <script src="<%= Url.Content ("~/Scripts/Stats.js") %>" type="text/javascript"></script>
 
     <h2>Statistics</h2>
@@ -28,5 +33,11 @@
             <% } %>
         </tr>
     </table>
+    <p />
+    <div class="row charts section">
+        <div class="col-sm-6">
+            <div class="crashChart"></div>
+        </div>
+    </div>
 
 </asp:Content>

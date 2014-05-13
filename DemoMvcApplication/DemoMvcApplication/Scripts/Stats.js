@@ -55,6 +55,32 @@ function AddCityStats(statsByCityAddress) {
                 var newText = document.createTextNode(yearCountMap[year]);
                 cell.appendChild(newText);
             }
+            RenderGraph(yearCountMap, city + " (" + county + ")");
         },
         "json");
+}
+
+var crashChart;
+var data = [];
+
+function RenderGraph(yearCountMap, lineTitle) {
+
+    var graphLine = [];
+    for (var year in yearCountMap) {
+        graphLine.push({ x: year, y: yearCountMap[year] });
+    }
+    data.push({ name: lineTitle, data: graphLine });
+
+    if (!crashChart) {
+        crashChart = new Contour({
+            el: '.crashChart',
+            xAxis: { title: 'Year', type: 'linear' },
+            yAxis: { title: 'Number of Pedcycle crashes' },
+            legend: { vAlign: 'top', hAlign: 'right' }
+        })
+        .cartesian()
+        .line()
+        .tooltip();
+    }
+    crashChart.setData(data).legend(data).render();
 }
