@@ -102,6 +102,10 @@
     </Content>
     <Content Include="App_Data\english-words.txt" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Graphics\contour\contour.css" />
+    <Content Include="Scripts\Graphics\contour\contour.js" />
+    <Content Include="Scripts\Graphics\d3\d3.js" />
+    <Content Include="Scripts\Graphics\lodash.js" />
     <Content Include="Scripts\Stats.js" />
     <Content Include="Scripts\WordChange.js" />
     <Content Include="Views\Home\ShowDataUserControl.ascx" />
@@ -145,6 +149,7 @@
       <LastGenOutput>DemoMvcDataClasses.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <None Include="Scripts\Graphics\d3\LICENSE" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
   </ItemGroup>
   <ItemGroup>
